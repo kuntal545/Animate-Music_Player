@@ -18,7 +18,9 @@
       overflow: hidden;
       position: relative;
     }
-      .logo {
+
+    /* Logo Styling */
+    .logo {
       position: absolute;
       top: 20px;
       left: 20px;
@@ -70,7 +72,6 @@
     }
 
     .time-slider {
-      -webkit-appearance: none;
       width: 100%;
       height: 5px;
       border-radius: 5px;
@@ -103,7 +104,10 @@
   </style>
 </head>
 <body>
-    <div class="logo"></div>
+  <!-- Logo -->
+  <div class="logo"></div>
+  
+  <!-- Music Player -->
   <div class="player">
     <div class="album-art"></div>
     <h2>Now Playing</h2>
@@ -135,8 +139,8 @@
     const songs = [
       { title: 'Aigiri Nandini - Single', src: 'song1.mp3', img: 'Aigiri.jpg' },
       { title: 'Billy X | Juttni |', src: 'song2.mp3', img: 'jutni.jpg' },
-      { title: 'Hanumankind – Big Dawgs |', src: 'song3.mp3', img: 'Hanuman kind.jpg' },
-      { title: 'Bela bose-Anjan Dutta', src: 'song4.mp3', img: 'Bela.jpg'}
+      { title: 'Hanumankind – Big Dawgs ', src: 'song3.mp3', img: 'Hanuman kind.jpg' },
+      { title: 'Bela bose-Anjan Dutta', src: 'song4.mp3', img: 'Bela.jpg' }
     ];
 
     let currentSongIndex = 0;
@@ -146,6 +150,11 @@
       audio.src = song.src;
       songTitle.textContent = song.title;
       document.querySelector('.album-art').style.backgroundImage = `url('${song.img}')`;
+      
+      // Reset time slider and time display
+      timeSlider.value = 0;
+      currentTimeElem.textContent = "0:00";
+      totalTimeElem.textContent = formatTime(audio.duration); // Update total time
     }
 
     function playPause() {
@@ -173,8 +182,10 @@
     }
 
     function updateProgress() {
-      const progressPercent = (audio.currentTime / audio.duration) * 100;
-      timeSlider.value = progressPercent;
+      if (audio.duration > 0) {
+        const progressPercent = (audio.currentTime / audio.duration) * 100;
+        timeSlider.value = progressPercent;
+      }
 
       currentTimeElem.textContent = formatTime(audio.currentTime);
       totalTimeElem.textContent = formatTime(audio.duration);
