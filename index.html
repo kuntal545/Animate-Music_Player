@@ -16,6 +16,17 @@
       background: linear-gradient(135deg, #4a90e2, #9013fe);
       color: white;
       overflow: hidden;
+      position: relative;
+    }
+      .logo {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 70px;
+      height: 70px;
+      background: url('logo2.jpg') no-repeat center center;
+      background-size: contain;
+      border-radius: 50%;
     }
 
     .player {
@@ -92,6 +103,7 @@
   </style>
 </head>
 <body>
+    <div class="logo"></div>
   <div class="player">
     <div class="album-art"></div>
     <h2>Now Playing</h2>
